@@ -7,7 +7,7 @@ Clonar el Repositorio:
 
 bash
 Copiar código
-https://github.com/jscalvo1994/Prueba1/tree/main
+https://github.com/jscalvo1994/Prueba1.git
 cd MyCocktailApp
 Instalar Dependencias:
 
