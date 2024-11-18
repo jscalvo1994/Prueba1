@@ -1,14 +1,20 @@
-import React, { useState, useEffect } from 'react';
-import { searchCocktailsByName, fetchAllCocktails, Cocktail } from '@/services/apiCoctels';
-import Navbar from '../navbar/Navbar';
-import CocktailCard from './filters/cocktail/CocktailCard';
-import CocktailDetailsModal from './filters/cocktail/CocktailDetailsModal';
+import React, { useState, useEffect } from "react";
+import {
+  searchCocktailsByName,
+  fetchAllCocktails,
+  Cocktail,
+} from "@/services/apiCoctels";
+import Navbar from "../navbar/Navbar";
+import CocktailCard from "./filters/cocktail/CocktailCard";
+import CocktailDetailsModal from "./filters/cocktail/CocktailDetailsModal";
 
 const CocktailList: React.FC<{ searchQuery: string }> = ({ searchQuery }) => {
   const [cocktails, setCocktails] = useState<Cocktail[]>([]);
   const [filteredCocktails, setFilteredCocktails] = useState<Cocktail[]>([]);
-  const [selectedCocktail, setSelectedCocktail] = useState<Cocktail | null>(null);
-  const [filterType, setFilterType] = useState<string>(''); // Filtro por tipo de bebida
+  const [selectedCocktail, setSelectedCocktail] = useState<Cocktail | null>(
+    null
+  );
+  const [filterType, setFilterType] = useState<string>(""); // Filtro por tipo de bebida
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -24,8 +30,8 @@ const CocktailList: React.FC<{ searchQuery: string }> = ({ searchQuery }) => {
         setCocktails(data);
         setFilteredCocktails(data); // Inicializa los cócteles filtrados con todos
       } catch (err) {
-        console.error('Error fetching cocktails:', err);
-        setError('Failed to load cocktails.');
+        console.error("Error fetching cocktails:", err);
+        setError("Failed to load cocktails.");
       } finally {
         setLoading(false);
       }
@@ -36,12 +42,14 @@ const CocktailList: React.FC<{ searchQuery: string }> = ({ searchQuery }) => {
 
   const handleShowDetails = async (id: string) => {
     try {
-      const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`);
+      const response = await fetch(
+        `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`
+      );
       const data = await response.json();
       if (data.drinks && data.drinks.length > 0) {
         const cocktail = data.drinks[0];
         const ingredients = Object.entries(cocktail)
-          .filter(([key]) => key.startsWith('strIngredient') && cocktail[key])
+          .filter(([key]) => key.startsWith("strIngredient") && cocktail[key])
           .map(([_, value]) => value as string);
 
         setSelectedCocktail({
@@ -50,7 +58,7 @@ const CocktailList: React.FC<{ searchQuery: string }> = ({ searchQuery }) => {
         });
       }
     } catch (err) {
-      console.error('Error fetching cocktail details:', err);
+      console.error("Error fetching cocktail details:", err);
     }
   };
 
@@ -80,7 +88,9 @@ const CocktailList: React.FC<{ searchQuery: string }> = ({ searchQuery }) => {
 
         {/* Selector de Filtros */}
         <div className="mb-4">
-          <label htmlFor="filter-type" className="form-label">Filter by Type:</label>
+          <label htmlFor="filter-type" className="form-label">
+            Filter by Type:
+          </label>
           <select
             id="filter-type"
             className="form-select"
@@ -97,12 +107,15 @@ const CocktailList: React.FC<{ searchQuery: string }> = ({ searchQuery }) => {
 
         {/* Lista Filtrada */}
         <div className="row">
+          {" "}
+          {/* Rejilla para alinear las tarjetas */}
           {filteredCocktails.map((cocktail) => (
-            <CocktailCard
-              key={cocktail.idDrink}
-              cocktail={cocktail}
-              onShowDetails={handleShowDetails}
-            />
+            <div className="col-md-3 mb-4" key={cocktail.idDrink}>
+              <CocktailCard
+                cocktail={cocktail}
+                onShowDetails={handleShowDetails}
+              />
+            </div>
           ))}
         </div>
       </div>
@@ -114,10 +127,11 @@ const CocktailList: React.FC<{ searchQuery: string }> = ({ searchQuery }) => {
             strDrink: selectedCocktail.strDrink,
             strDrinkThumb: selectedCocktail.strDrinkThumb,
             strCategory: selectedCocktail.strCategory,
-            strInstructions: selectedCocktail.strInstructions || 'No instructions available.',
+            strInstructions:
+              selectedCocktail.strInstructions || "No instructions available.",
             ingredients: selectedCocktail.ingredients || [],
           }}
-          onClose={() => setSelectedCocktail(null)}
+          onClose={() => setSelectedCocktail(null)} // Cierra el modal al hacer clic en el botón de cerrar
         />
       )}
     </div>

@@ -1,6 +1,4 @@
 import React from 'react';
-import './CoctaiDetailsModal.css';
-
 interface CocktailDetailsModalProps {
   cocktail: {
     strDrink: string;
@@ -16,26 +14,30 @@ const CocktailDetailsModal: React.FC<CocktailDetailsModalProps> = ({
   cocktail,
   onClose,
 }) => (
-  <div className="modal-overlay">
-    <div className="modal-content">
-      <button className="modal-close" onClick={onClose}>
+  <div className="modal-overlay-custom">
+    <div className="modal-content-custom">
+      <button className="modal-close-custom" onClick={onClose}>
         &times;
       </button>
-      <h2>{cocktail.strDrink}</h2>
-      <img
-        src={cocktail.strDrinkThumb}
-        alt={cocktail.strDrink}
-        className="modal-image"
-      />
-      <h4>Type: {cocktail.strCategory}</h4>
-      <h4>Ingredients:</h4>
-      <ul>
-        {cocktail.ingredients.map((ingredient, index) => (
-          <li key={index}>{ingredient}</li>
-        ))}
-      </ul>
-      <h4>Instructions:</h4>
-      <p>{cocktail.strInstructions}</p>
+      <div className="modal-body-custom">
+        <img
+          src={cocktail.strDrinkThumb}
+          alt={cocktail.strDrink}
+          className="modal-image-custom"
+        />
+        <div className="modal-details-custom">
+          <h2>{cocktail.strDrink}</h2>
+          <h4>Type: {cocktail.strCategory}</h4>
+          <h4>Ingredients:</h4>
+          <ul>
+            {cocktail.ingredients.map((ingredient, index) => (
+              <li key={index}>{ingredient}</li>
+            ))}
+          </ul>
+          <h4>Instructions:</h4>
+          <p>{cocktail.strInstructions}</p>
+        </div>
+      </div>
     </div>
   </div>
 );

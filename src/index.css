@@ -1,2 +1,416 @@
 @import 'bootstrap/dist/css/bootstrap.min.css';
 @import 'bootstrap-icons/font/bootstrap-icons.css';
+
+/*Modal-custom*/
+/* Fondo del overlay */
+.modal-overlay-custom {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Fondo oscuro semi-transparente */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1050;
+  }
+  
+  /* Contenedor del modal */
+  .modal-content-custom {
+    background: #ffffff; /* Fondo blanco */
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    max-width: 900px; /* Ancho máximo */
+    width: 90%; /* Responsivo */
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    padding: 20px;
+  }
+  
+  /* Botón de cierre */
+  .modal-close-custom {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 1.5rem;
+    color: #333;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  
+  /* Contenedor del cuerpo del modal */
+  .modal-body-custom {
+    display: flex;
+    gap: 20px; /* Espaciado entre la imagen y el contenido */
+  }
+  
+  /* Imagen en el modal */
+  .modal-image-custom {
+    flex: 1; /* Ocupa 1 parte proporcional */
+    max-width: 300px; /* Tamaño máximo de la imagen */
+    height: auto;
+    border-radius: 8px;
+    object-fit: cover; /* Ajusta la imagen sin deformarla */
+  }
+  
+  /* Detalles del cóctel */
+  .modal-details-custom {
+    flex: 2; /* Ocupa 2 partes proporcionales */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+  
+  /* Título del cóctel */
+  .modal-title-custom {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+    color: #333;
+  }
+  
+  /* Listado de ingredientes */
+  .modal-details-custom ul {
+    margin: 10px 0;
+    padding-left: 20px;
+  }
+  
+  .modal-details-custom ul li {
+    list-style-type: disc;
+    margin-bottom: 5px;
+  }
+  
+  /* Texto de las instrucciones */
+  .modal-details-custom p {
+    line-height: 1.6;
+    color: #555;
+  }
+/*Fin modal Custom*/
+
+/*Cocktail Card custom */
+
+/* Contenedor de la tarjeta */
+.custom-CocktailCard {
+    border: 1px solid #ddd; /* Borde ligero */
+    border-radius: 8px; /* Esquinas redondeadas */
+    background-color: white; /* Fondo blanco */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    overflow: hidden; /* Evita que el contenido se salga de los bordes redondeados */
+    transition: transform 0.2s ease, box-shadow 0.2s ease; /* Animación suave */
+  }
+  
+  .custom-CocktailCard:hover {
+    transform: translateY(-5px); /* Eleva ligeramente la tarjeta */
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15); /* Sombra más intensa */
+  }
+  
+  /* Imagen de la tarjeta */
+  .custom-CocktailCard-img {
+    width: 100%; /* Imagen ocupa todo el ancho */
+    height: 350px; /* Altura fija para uniformidad */
+    object-fit: cover; /* Mantiene la proporción de la imagen */
+    transition: transform 0.2s ease-in-out; /* Animación suave al hacer hover */
+  }
+  
+  .custom-CocktailCard-img:hover {
+    transform: scale(1.05); /* Ampliación ligera al hacer hover */
+  }
+  
+  /* Cuerpo de la tarjeta */
+  .custom-CocktailCard-body {
+    padding: 16px; /* Espaciado interno */
+    text-align: center; /* Centra el contenido */
+    box-sizing: border-box; /* Incluye el padding dentro del tamaño total */
+  }
+  
+  /* Título del cóctel */
+  .custom-CocktailCard-title {
+    font-size: 1.2rem; /* Tamaño del texto */
+    font-weight: bold; /* Texto en negrita */
+    margin-bottom: 10px; /* Espaciado inferior */
+    color: #333; /* Color del texto */
+  }
+  
+  /* Categoría */
+  .custom-CocktailCard-category {
+    font-size: 0.9rem; /* Tamaño del texto */
+    color: #555; /* Color gris */
+    margin-bottom: 1rem; /* Espaciado inferior */
+  }
+  
+  /* Botón */
+  .custom-CocktailCard-btn {
+    background-color: #007bff; /* Azul Bootstrap */
+    color: white; /* Texto blanco */
+    border: none; /* Sin borde */
+    padding: 10px 15px; /* Espaciado interno */
+    font-size: 0.9rem; /* Tamaño del texto */
+    font-weight: bold; /* Texto en negrita */
+    text-transform: uppercase; /* Texto en mayúsculas */
+    cursor: pointer; /* Cambia el cursor al pasar el mouse */
+    transition: background-color 0.2s ease, transform 0.2s ease; /* Animación suave */
+  }
+  
+  .custom-CocktailCard-btn:hover {
+    background-color: #0056b3; /* Azul más oscuro */
+    transform: translateY(-2px); /* Efecto de elevación */
+  }
+  
+  .custom-CocktailCard-btn:focus {
+    outline: none; /* Sin borde de foco */
+    box-shadow: 0 0 4px rgba(0, 123, 255, 0.5); /* Sombra azul */
+  }
+
+/*Fin cocktail card custom*/
+
+
+/* Ingredients Custom */
+
+/* Overlay del modal */
+.modal-overlay-custom-ingredients {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Fondo oscuro transparente */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1050;
+  }
+  
+  /* Contenedor principal del modal */
+  .custom-IngredientModal-content {
+    background: white; /* Fondo blanco */
+    border-radius: 12px; /* Bordes redondeados */
+    padding: 20px; /* Espaciado interno */
+    width: 80%;
+    max-width: 600px;
+    display: flex; /* Uso de flexbox para alinear elementos */
+    flex-direction: row; /* Imagen y texto uno al lado del otro */
+    gap: 20px; /* Espacio entre la imagen y el texto */
+    position: relative;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Sombra */
+    color: black; /* Color negro para el texto */
+  }
+  
+  /* Imagen del ingrediente */
+  .custom-IngredientModal-img {
+    width: 150px; /* Ancho de la imagen */
+    height: 150px; /* Altura de la imagen */
+    object-fit: cover; /* Ajuste de la imagen sin deformación */
+    border-radius: 8px; /* Bordes redondeados */
+  }
+  
+  /* Contenedor del texto */
+  .custom-IngredientModal-text {
+    font-size: 1rem; /* Tamaño de fuente */
+    color: black; /* Texto en negro */
+    line-height: 1.5; /* Altura de línea */
+    flex: 1; /* Permite que el texto ocupe el espacio restante */
+  }
+  
+  /* Título del modal */
+  .custom-IngredientModal-title {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+    color: black; /* Color negro para el título */
+  }
+  
+  /* Botón de cierre */
+  .modal-close-custom-IngredientModal {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 1.5rem;
+    background: none;
+    border: none;
+    color: #333; /* Color inicial */
+    cursor: pointer;
+  }
+  
+  .modal-close:hover {
+    color: #007bff; /* Color al pasar el ratón */
+  }
+  
+
+/*Fin Ingredient Custom*/
+
+
+/*Filtros base */
+
+.base-filter {
+    margin: 20px;
+  }
+  
+  .base-filter .form-control {
+    border-radius: 20px;
+    padding: 10px 15px;
+    border: 1px solid #ddd;
+  }
+  
+  .base-filter .card {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .base-filter .card img {
+    border-radius: 5px 5px 0 0;
+  }
+  
+  .base-filter .card-title {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+  }
+  
+  .base-filter .btn {
+    width: 100%;
+  }
+  
+
+/*Fin filtros base*/
+
+
+/*Estilos Auth*/
+/* Contenedor principal */
+.auth-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f9f9f9; /* Fondo claro */
+  padding: 20px;
+}
+
+/* Tarjeta */
+.auth-card {
+  width: 100%;
+  max-width: 400px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  background-color: white;
+  padding: 20px;
+}
+
+/* Encabezado */
+.auth-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.auth-icon {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: 0 auto 10px;
+}
+
+.auth-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.auth-title {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #333; /* Texto oscuro */
+  margin-bottom: 10px;
+}
+
+/* Campos del formulario */
+.auth-form .form-floating {
+  margin-bottom: 15px;
+}
+
+.auth-form .form-control {
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  padding: 10px;
+  font-size: 1rem;
+}
+
+.auth-form .form-control:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 4px rgba(0, 123, 255, 0.5); /* Efecto de foco */
+}
+
+/* Botón */
+.auth-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  font-size: 1rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  transition: background-color 0.3s ease;
+}
+
+.auth-button:hover {
+  background-color: #0056b3;
+}
+
+/* Mensajes de alerta */
+.auth-alert {
+  text-align: center;
+  padding: 10px;
+  font-size: 0.9rem;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+.auth-alert-info {
+  background-color: #eaf4fc;
+  color: #3178c6;
+  border: 1px solid #b6d4fe;
+}
+
+/* Enlaces */
+.auth-link {
+  color: #007bff;
+  cursor: pointer;
+  font-weight: bold;
+  transition: color 0.2s ease;
+}
+
+.auth-link:hover {
+  color: #0056b3;
+}
+/* Botón de guardar cambios */
+.auth-button-success {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  font-size: 1rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  transition: background-color 0.3s ease;
+}
+
+.auth-button-success:hover {
+  background-color: #218838;
+}
+
+/* Botón de regresar */
+.auth-button-secondary {
+  background-color: #6c757d;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  font-size: 1rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  transition: background-color 0.3s ease;
+}
+
+.auth-button-secondary:hover {
+  background-color: #5a6268;
+}
+
+/*Fin de estilos Auth*/
+

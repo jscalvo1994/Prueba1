@@ -12,6 +12,7 @@ const EditProfileModal: React.FC<EditProfileModalProps> = ({ onClose }) => {
   const handleSave = () => {
     const updatedUser = { ...user, firstName: name, email };
     localStorage.setItem('user', JSON.stringify(updatedUser));
+    
     onClose();
   };
 

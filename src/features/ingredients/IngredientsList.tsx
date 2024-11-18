@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import Navbar from '../navbar/Navbar';
 import { fetchIngredients, Ingredient } from '@/services/apiCoctels';
-import './IngredientsList.css';
-import IngredientDetailsModal from './IngredientDetailsModal';
+import IngredientCard from '../coktails/filters/cocktail/IngredientCard';
+import IngredientDetailsModal from '../coktails/filters/cocktail/IngredientDetailsModal';
 
-const IngredientsList: React.FC = () => {
+const IngredientList: React.FC = () => {
   const [ingredients, setIngredients] = useState<Ingredient[]>([]);
   const [filteredIngredients, setFilteredIngredients] = useState<Ingredient[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
@@ -18,7 +18,7 @@ const IngredientsList: React.FC = () => {
         setLoading(true);
         const data = await fetchIngredients();
         setIngredients(data);
-        setFilteredIngredients(data); // Inicialmente, todos los ingredientes están visibles
+        setFilteredIngredients(data);
       } catch (err) {
         console.error('Error loading ingredients:', err);
         setError('Failed to load ingredients.');
@@ -30,18 +30,18 @@ const IngredientsList: React.FC = () => {
     loadIngredients();
   }, []);
 
-  // Manejar cambios en la búsqueda
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const query = e.target.value.toLowerCase();
     setSearchQuery(query);
 
     const filtered = ingredients.filter((ingredient) =>
-      ingredient.strIngredient1.toLowerCase().includes(query)
+      ingredient.name.toLowerCase().includes(query)
     );
     setFilteredIngredients(filtered);
   };
 
   const handleShowDetails = (ingredient: string) => {
+    console.log('Selected Ingredient:', ingredient);
     setSelectedIngredient(ingredient);
   };
 
@@ -68,24 +68,12 @@ const IngredientsList: React.FC = () => {
         />
 
         <div className="row">
-          {filteredIngredients.map((ingredient, index) => (
-            <div className="col-md-4 mb-3" key={index}>
-              <div className="card">
-                <img
-                  src={`https://www.thecocktaildb.com/images/ingredients/${ingredient.strIngredient1}-Medium.png`}
-                  alt={ingredient.strIngredient1}
-                  className="card-img-top"
-                />
-                <div className="card-body">
-                  <h5 className="card-title">{ingredient.strIngredient1}</h5>
-                  <button
-                    className="btn btn-primary"
-                    onClick={() => handleShowDetails(ingredient.strIngredient1)}
-                  >
-                    Ver Detalles
-                  </button>
-                </div>
-              </div>
+          {filteredIngredients.map((ingredient) => (
+            <div className="col-md-4 mb-3" key={ingredient.id}>
+              <IngredientCard
+                ingredient={ingredient}
+                onShowDetails={handleShowDetails}
+              />
             </div>
           ))}
         </div>
@@ -101,4 +89,4 @@ const IngredientsList: React.FC = () => {
   );
 };
 
-export default IngredientsList;
+export default IngredientList;

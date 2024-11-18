@@ -8,15 +8,27 @@ export const coctelApiClient = axios.create({
   baseURL: BASE_URL,
 });
 
-// Tipos definidos para los cócteles
+// ======================
+// Tipos Definidos
+// ======================
+
+// Tipo detallado para Cócteles
 export interface Cocktail {
-  idDrink: string;           // ID único del cóctel
-  strDrink: string;          // Nombre del cóctel
-  strDrinkThumb: string;     // URL de la imagen del cóctel
-  strCategory: string;       // Categoría del cóctel
-  strAlcoholic: string;      // Información sobre si el cóctel contiene alcohol
-  strInstructions: string;   // Instrucciones para preparar el cóctel
-  ingredients?: string[];    // Lista de ingredientes (opcional)
+  idDrink: string;
+  strDrink: string;
+  strDrinkThumb: string;
+  strCategory: string;
+  strAlcoholic: string;
+  strInstructions: string;
+  ingredients: string[];
+}
+
+// Tipo detallado para Ingredientes
+export interface Ingredient {
+  id: number;               // ID único del ingrediente
+  name: string;             // Nombre del ingrediente
+  image: string;            // URL de la imagen del ingrediente
+  description?: string;     // Descripción opcional del ingrediente
 }
 
 // Respuesta esperada al consultar cócteles
@@ -24,19 +36,14 @@ export interface CocktailResponse {
   drinks: Cocktail[] | null;
 }
 
-// Tipos definidos para los ingredientes
-export interface Ingredient {
-  strIngredient1: string;    // Nombre del ingrediente
-}
-
 // Respuesta esperada al consultar ingredientes
 export interface IngredientResponse {
-  drinks: Ingredient[];
+  drinks: { strIngredient1: string }[];
 }
 
-// =====================
+// =========================
 // Funciones de Cócteles
-// =====================
+// =========================
 
 // Obtener cócteles por la primera letra
 export const listCocktailsByFirstLetter = async (letter: string): Promise<Cocktail[]> => {
@@ -52,19 +59,17 @@ export const listCocktailsByFirstLetter = async (letter: string): Promise<Cockta
 // Obtener todos los cócteles disponibles (por todas las letras del abecedario)
 export const fetchAllCocktails = async (): Promise<Cocktail[]> => {
   try {
-    const alphabet = 'abcdefghijklmnopqrstuvwxyz'.split(''); // Array con todas las letras
+    const alphabet = 'abcdefghijklmnopqrstuvwxyz'.split('');
     const requests = alphabet.map((letter) =>
       coctelApiClient.get<CocktailResponse>(`/search.php?f=${letter}`)
     );
 
-    // Ejecutar todas las solicitudes concurrentemente
     const responses = await Promise.allSettled(requests);
 
-    // Filtrar resultados exitosos y combinar listas de cócteles
     return responses
       .filter((result): result is PromiseFulfilledResult<any> => result.status === 'fulfilled')
       .flatMap((result) => result.value.data.drinks || [])
-      .filter((drink): drink is Cocktail => !!drink); // Filtrar resultados válidos
+      .filter((drink): drink is Cocktail => !!drink);
   } catch (error) {
     console.error('Error fetching all cocktails:', error);
     throw new Error('Failed to fetch all cocktails.');
@@ -78,10 +83,8 @@ export const fetchCocktailsByIds = async (ids: number[]): Promise<Cocktail[]> =>
       coctelApiClient.get<CocktailResponse>(`/lookup.php?i=${id}`)
     );
 
-    // Manejar solicitudes concurrentes
     const responses = await Promise.allSettled(requests);
 
-    // Filtrar resultados exitosos y combinar detalles de cócteles
     return responses
       .filter((result): result is PromiseFulfilledResult<any> => result.status === 'fulfilled')
       .map((result) => result.value.data.drinks?.[0])
@@ -95,7 +98,7 @@ export const fetchCocktailsByIds = async (ids: number[]): Promise<Cocktail[]> =>
 // Buscar cócteles por nombre
 export const searchCocktailsByName = async (name: string): Promise<Cocktail[]> => {
   try {
-    if (!name.trim()) return []; // Retorna un array vacío si el nombre está vacío
+    if (!name.trim()) return [];
     const response = await coctelApiClient.get<CocktailResponse>(`/search.php?s=${name}`);
     return response.data.drinks || [];
   } catch (error) {
@@ -112,9 +115,28 @@ export const searchCocktailsByName = async (name: string): Promise<Cocktail[]> =
 export const fetchIngredients = async (): Promise<Ingredient[]> => {
   try {
     const response = await coctelApiClient.get<IngredientResponse>('/list.php?i=list');
-    return response.data.drinks || [];
+
+    // Mapear los ingredientes para incluir el nombre, ID ficticio y URL de la imagen
+    return response.data.drinks.map((ingredient, index) => ({
+      id: index + 1, // Generar un ID único ficticio basado en el índice
+      name: ingredient.strIngredient1,
+      image: `https://www.thecocktaildb.com/images/ingredients/${ingredient.strIngredient1}-Medium.png`,
+    }));
   } catch (error) {
     console.error('Error fetching ingredients:', error);
     throw new Error('Failed to fetch ingredients.');
+  }
+};
+
+// Buscar ingredientes por nombre
+export const searchIngredientsByName = async (name: string): Promise<Ingredient[]> => {
+  try {
+    const allIngredients = await fetchIngredients();
+    return allIngredients.filter((ingredient) =>
+      ingredient.name.toLowerCase().includes(name.toLowerCase())
+    );
+  } catch (error) {
+    console.error('Error searching ingredients by name:', error);
+    throw new Error('Failed to search ingredients by name.');
   }
 };
