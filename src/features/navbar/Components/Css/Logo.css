@@ -1,0 +1,16 @@
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .logo .bi {
+    font-size: 1.5rem; /* Tamaño del ícono */
+    color: #007399; /* Color primario */
+  }
+  
+  .logo h1 {
+    font-size: 1.2rem; /* Tamaño del texto */
+    color: #007399;
+  }
+  

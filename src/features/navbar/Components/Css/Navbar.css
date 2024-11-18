@@ -1,0 +1,162 @@
+/* Navbar.css */
+
+/* Estilos generales del navbar */
+.navbar {
+  background-color: #f8f9fa;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 10px 20px;
+}
+
+.navbar .nav-link {
+  color: #333;
+  font-size: 16px;
+  font-weight: 500;
+  transition: color 0.3s ease;
+  text-decoration: none;
+}
+
+.navbar .nav-link:hover {
+  color: #007bff;
+}
+
+.navbar .nav-link.active {
+  font-weight: bold;
+  color: #007bff;
+}
+
+/* Botón del navbar */
+.navbar-toggler {
+  border: none;
+  outline: none;
+}
+
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='rgba%280, 0, 0, 0.5%29' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+
+/* Dropdown general */
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 0.5rem 0;
+  z-index: 1000;
+}
+
+.dropdown-menu.show {
+  display: block;
+}
+
+/* Barra de búsqueda */
+.search-bar {
+  position: relative;
+  max-width: 400px;
+  width: 100%;
+  margin: auto;
+}
+
+.search-bar .form-control {
+  border-radius: 20px;
+  padding: 10px 15px;
+  border: 1px solid #ddd;
+  font-size: 14px;
+}
+
+.search-bar .form-control:hover,
+.search-bar .form-control:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 4px rgba(0, 123, 255, 0.5);
+}
+
+/* User Section */
+.user-section {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.user-photo {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border: 2px solid #ddd;
+  border-radius: 50%;
+}
+
+.user-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  padding: 20px 15px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  max-width: 300px;
+  text-align: center;
+}
+
+.user-card img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin-bottom: 15px;
+  object-fit: cover;
+}
+
+.user-card h5 {
+  margin-bottom: 10px;
+  font-size: 1.2rem;
+  color: #333;
+}
+
+.user-card p {
+  margin-bottom: 15px;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.user-card button {
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 10px;
+  font-size: 0.9rem;
+}
+
+/* Modal */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1050;
+}
+
+.modal-content {
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  max-width: 600px;
+  width: 90%;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  position: relative;
+  text-align: center;
+}
+
+.modal-close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  font-size: 1.5rem;
+  color: #333;
+  background: none;
+  border: none;
+  cursor: pointer;
+}

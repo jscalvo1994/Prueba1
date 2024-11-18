@@ -1,0 +1,35 @@
+.container {
+  max-width: 800px;
+  margin: auto;
+}
+
+.list-group-item {
+  font-size: 1.2rem;
+  padding: 10px 15px;
+}
+.container {
+  max-width: 800px;
+  margin: auto;
+}
+
+.form-control {
+  border-radius: 20px;
+  padding: 10px 15px;
+  border: 1px solid #ddd;
+  font-size: 14px;
+}
+
+.card {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.card-img-top {
+  height: 150px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.card-title {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}

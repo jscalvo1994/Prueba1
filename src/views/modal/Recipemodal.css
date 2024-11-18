@@ -1,0 +1,86 @@
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 1.8); /* Reduce la transparencia del fondo */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  .modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    position: relative;
+    animation: fadeIn 0.3s ease-in-out;
+  }
+  
+  .modal-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: white;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+  
+  .modal-title {
+    margin-bottom: 10px;
+    font-size: 1.5rem;
+    text-align: center;
+  }
+  
+  .modal-image {
+    width: 100%; /* Ocupa todo el ancho del modal */
+    max-width: 300px; /* Limita el tamaño máximo de la imagen */
+    display: block;
+    margin: 10px auto; /* Centra la imagen */
+    border-radius: 8px;
+    object-fit: cover; /* Mantiene las proporciones de la imagen */
+  }
+  .modal-content p {
+    color: #fffdfd; /* Cambia el color del texto general */
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+  ul {
+    padding-left: 20px;
+  }
+  
+  li {
+    color: #fffdfd; /* Cambia el color del texto general */
+    margin-bottom: 5px;
+  }
+  
+  h4 {
+    color: #00ff95; /* Cambia el color del texto general */
+    margin-top: 15px;
+    margin-bottom: 5px;
+  }
+  
+  p {
+    color: #00ff95; /* Cambia el color del texto general */
+    margin-top: 15px;
+    line-height: 1.5;
+  }
+  
+  /* Animación para el modal */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  

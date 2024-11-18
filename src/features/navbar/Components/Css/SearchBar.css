@@ -1,0 +1,46 @@
+.search-bar {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+    margin: auto;
+  }
+  
+  .form-control {
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+  }
+  
+  .suggestions-list {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    border: 1px solid #ddd;
+    border-top: none;
+    z-index: 10;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .suggestions-list li {
+    padding: 10px;
+    cursor: pointer;
+  }
+  
+  .suggestions-list li:hover {
+    background-color: #f0f0f0;
+  }
+  
+  .loading {
+    font-size: 14px;
+    color: #666;
+  }
+  
+  .error {
+    font-size: 14px;
+    color: red;
+  }
+  
